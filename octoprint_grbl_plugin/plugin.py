@@ -29,7 +29,11 @@ def translate_ok(comm_instance, line, *args, **kwargs):
     """
     if 'MPos' in line:
         # <Idle,MPos:0.000,0.000,0.000,WPos:0.000,0.000,0.000,RX:3,0/0>
-        match = re.search(r'MPos:([\d\.]+),([\d\.]+),([\d\.]+)', line)
+        # <Run|MPos:-17.380,-7.270,0.000|FS:1626,0>
+        match = re.search(r'MPos:(-?[\d\.]+),(-?[\d\.]+),(-?[\d\.]+)', line)
+        if match is None:
+            log.warning('Bad data %s', line.rstrip())
+            return line
         # OctoPrint records positions in some instances.
         # It needs a different format. Put both on the same line so the GRBL info is not lost
         # and is accessible for "controls" to read.

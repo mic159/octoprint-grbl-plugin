@@ -29,9 +29,10 @@ controls:
   layout: vertical
   children:
   - name: Realtime State
-    # <Idle,MPos:0.000,0.000,0.000,WPos:0.000,0.000,0.000,RX:3,0/0>
-    regex: '<([^,]+),MPos:([+\-\d.]+,[+\-\d.]+,[+\-\d.]+),WPos:([+\-\d.]+,[+\-\d.]+,[+\-\d.]+)'
-    template: 'State: {0}  Machine Position: {1}  Work Position: {2}'
+    # GRBL 0.8  <Idle,MPos:0.000,0.000,0.000,WPos:0.000,0.000,0.000,RX:3,0/0>
+    # Grbl 1.1  <Run|MPos:-39.430,-16.480,0.000|FS:1626,0>
+    regex: '<([^,]+)[,|]MPos:([+\-\d.]+,[+\-\d.]+,[+\-\d.]+)'
+    template: 'State: {0}  Machine Position: {1}'
     type: feedback
   - name: GCode state
     # [G0 G54 G17 G21 G90 G94 M0 M5 M9 T0 F300. S700.]
