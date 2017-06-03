@@ -42,6 +42,13 @@ def translate_ok(comm_instance, line, *args, **kwargs):
             original=line
         )
 
+    if line.startswith('Grbl'):
+        # Hack to make Arduino based GRBL work.
+        # When the serial port is opened, it resets and the "hello" command
+        # is not processed.
+        # This makes Octoprint recognise the startup message as a successful connection.
+        return 'ok ' + line
+
     if not line.rstrip().endswith('ok'):
         return line
 
