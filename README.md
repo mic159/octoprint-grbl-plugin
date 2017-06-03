@@ -31,7 +31,7 @@ controls:
   - name: Realtime State
     # GRBL 0.8  <Idle,MPos:0.000,0.000,0.000,WPos:0.000,0.000,0.000,RX:3,0/0>
     # Grbl 1.1  <Run|MPos:-39.430,-16.480,0.000|FS:1626,0>
-    regex: '<([^,]+)[,|]MPos:([+\-\d.]+,[+\-\d.]+,[+\-\d.]+)'
+    regex: '<([^,]+)[,|][WM]Pos:([+\-\d.]+,[+\-\d.]+,[+\-\d.]+)'
     template: 'State: {0}  Machine Position: {1}'
     type: feedback
   - name: GCode state
@@ -41,4 +41,12 @@ controls:
     type: feedback
   - command: '?$G'
     name: Refresh
+  - command: '$H'
+    name: Home
+  - command: '$X'
+    name: Unlock
+  - command: '!'
+    name: Pause
+  - command: '~'
+    name: Resume
 ```
