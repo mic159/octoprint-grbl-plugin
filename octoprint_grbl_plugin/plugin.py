@@ -37,7 +37,7 @@ def translate_ok(comm_instance, line, *args, **kwargs):
         # OctoPrint records positions in some instances.
         # It needs a different format. Put both on the same line so the GRBL info is not lost
         # and is accessible for "controls" to read.
-        return 'ok X:{0} Y:{1} Z:{2} {original}'.format(
+        return 'ok X:{0} Y:{1} Z:{2} E:0 {original}'.format(
             *match.groups(),
             original=line
         )
